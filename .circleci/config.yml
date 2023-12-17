@@ -6,17 +6,37 @@ version: 2.1
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
       - run:
           name: "Say hello World"
           command: "echo Hello, World!"
+
+  install-module:
+    docker:
+      - image: node:14
+    steps:
+      - checkout
+      - run:
+          name: "Change directory to TYPESCRIPT"
+          command: "cd ./TYPESCRIPT"
+      - run:
+          name: "Install dependencies"
+          command: "npm install"
+
+  run-test:
+    docker:
+      - image: node:14
+    steps:
+      - checkout
+      - run:
+          name: "Change directory to TYPESCRIPT"
+          command: "cd ./TYPESCRIPT"
+      - run:
+          name: "running test"
+          command: "npm run test"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -24,3 +44,5 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - install-module
+      - run-test
