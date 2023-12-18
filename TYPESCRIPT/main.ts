@@ -1,9 +1,9 @@
 import * as readlineSync from 'readline-sync';
 
 export class RiceCooker {
-  private _ricePresent: boolean = false;
-  private _riceCooked: boolean = false;
-  private _heatingInProgress: boolean = false;
+  public _ricePresent: boolean = false;
+  public _riceCooked: boolean = false;
+  public _heatingInProgress: boolean = false;
   public _isPowered: boolean = true;
 
   addRice(): void {
@@ -65,16 +65,18 @@ export class RiceCooker {
     console.log('Thank you for using the Rice Cooker Simulator. Goodbye!');
     this._isPowered = false;
   }
-  
+
 }
 
 function displayMenu(): void {
-  console.log('\nWelcome to the Rice Cooker Simulator!');
-  console.log('1. Add rice');
-  console.log('2. Cook rice');
-  console.log('3. Keep warm');
-  console.log('4. Remove rice');
-  console.log('5. Quit');
+  if (process.env.NODE_ENV !== 'test') {
+    console.log('\nWelcome to the Rice Cooker Simulator!');
+    console.log('1. Add rice');
+    console.log('2. Cook rice');
+    console.log('3. Keep warm');
+    console.log('4. Remove rice');
+    console.log('5. Quit');
+  }
 }
 
 export const inputFunctions = {
@@ -115,4 +117,7 @@ export const simulateRiceCooker = (): void => {
   }
 };
 
-simulateRiceCooker();
+// Run the simulation only if not running in a test environment
+if (process.env.NODE_ENV !== 'test') {
+  simulateRiceCooker();
+}

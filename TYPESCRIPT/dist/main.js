@@ -1,15 +1,38 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.simulateRiceCooker = exports.inputFunctions = exports.RiceCooker = void 0;
-var readlineSync = require("readline-sync");
-var RiceCooker = /** @class */ (function () {
-    function RiceCooker() {
+const readlineSync = __importStar(require("readline-sync"));
+class RiceCooker {
+    constructor() {
         this._ricePresent = false;
         this._riceCooked = false;
         this._heatingInProgress = false;
         this._isPowered = true;
     }
-    RiceCooker.prototype.addRice = function () {
+    addRice() {
         if (!this._ricePresent) {
             this._ricePresent = true;
             console.log('Rice has been added.');
@@ -17,8 +40,8 @@ var RiceCooker = /** @class */ (function () {
         else {
             console.log('There\'s already rice in the rice cooker.');
         }
-    };
-    RiceCooker.prototype.cookRice = function () {
+    }
+    cookRice() {
         if (this._ricePresent && !this._riceCooked) {
             console.log('Cooking rice...');
             this._riceCooked = true;
@@ -30,8 +53,8 @@ var RiceCooker = /** @class */ (function () {
         else {
             console.log('The rice is already cooked.');
         }
-    };
-    RiceCooker.prototype.keepWarm = function () {
+    }
+    keepWarm() {
         if (this._ricePresent && this._riceCooked && !this._heatingInProgress) {
             console.log('The rice is now being kept warm.');
             this._heatingInProgress = true;
@@ -45,8 +68,8 @@ var RiceCooker = /** @class */ (function () {
         else {
             console.log('Keeping warm is already in progress.');
         }
-    };
-    RiceCooker.prototype.removeRice = function () {
+    }
+    removeRice() {
         if (this._ricePresent && this._heatingInProgress) {
             this._ricePresent = false;
             this._heatingInProgress = false;
@@ -68,13 +91,12 @@ var RiceCooker = /** @class */ (function () {
         else {
             console.log('There\'s no rice to remove or it is not cooked yet.');
         }
-    };
-    RiceCooker.prototype.quit = function () {
+    }
+    quit() {
         console.log('Thank you for using the Rice Cooker Simulator. Goodbye!');
         this._isPowered = false;
-    };
-    return RiceCooker;
-}());
+    }
+}
 exports.RiceCooker = RiceCooker;
 function displayMenu() {
     console.log('\nWelcome to the Rice Cooker Simulator!');
@@ -85,16 +107,16 @@ function displayMenu() {
     console.log('5. Quit');
 }
 exports.inputFunctions = {
-    getUserInput: function () { return readlineSync.question('Enter your choice: '); },
+    getUserInput: () => readlineSync.question('Enter your choice: '),
 };
-var simulateRiceCooker = function () {
-    var riceCooker = new RiceCooker();
-    var input;
+const simulateRiceCooker = () => {
+    const riceCooker = new RiceCooker();
+    let input;
     while (riceCooker._isPowered) {
         displayMenu();
         input = exports.inputFunctions.getUserInput();
         if (input) {
-            var choice = parseInt(input);
+            const choice = parseInt(input);
             if (!isNaN(choice)) {
                 if (choice === 1) {
                     riceCooker.addRice();
@@ -112,7 +134,7 @@ var simulateRiceCooker = function () {
                     riceCooker.quit();
                 }
                 else {
-                    console.log('Invalid choice. Please select a valid option...');
+                    console.log('Invalid choice. Please select a valid option.');
                 }
             }
             else {
