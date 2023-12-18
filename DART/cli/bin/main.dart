@@ -2,9 +2,27 @@ import 'dart:async';
 import 'dart:io';
 
 class RiceCooker {
-  bool _ricePresent = false;
-  bool _riceCooked = false;
-  bool _heatingInProgress = false;
+  late bool _ricePresent = false;
+  late bool _riceCooked = false;
+  late bool _heatingInProgress = false;
+
+  bool get isRicePresent => _ricePresent;
+
+  bool get isRiceCooked => _riceCooked;
+
+  bool get isHeatingInProgress => _heatingInProgress;
+
+  void setRicePresent(bool value) {
+    _ricePresent = value;
+  }
+
+  void setHeatingInProgress(bool value) {
+    _heatingInProgress = value;
+  }
+
+  void setRiceCooked(bool value) {
+    _riceCooked = value;
+  }
 
   void addRice() {
     if (!_ricePresent) {
@@ -42,18 +60,13 @@ class RiceCooker {
   }
 
   void removeRice() {
-    if (_heatingInProgress) {
-      _heatingInProgress = false;
-      _ricePresent = false;
-      print('The rice has been removed from the rice cooker.');
-    }else if (_ricePresent && _riceCooked) {
+    if (_ricePresent) {
       _ricePresent = false;
       _riceCooked = false;
+      _heatingInProgress = false;
       print('The rice has been removed from the rice cooker.');
-    } else if(_ricePresent && !_riceCooked){
-        _ricePresent= false;
-        print('The rice has been removed from the rice cooker.');
-    }else {
+    }
+    else {
       print('There\'s no rice to remove or it is not cooked yet.');
     }
   }
@@ -77,28 +90,34 @@ Future<void> simulateRiceCooker() async {
     print('Enter your choice: ');
     input = stdin.readLineSync();
 
-    if (input != null) {
-      var choice = int.tryParse(input);
-      if (choice != null) {
-        if (choice == 1) {
+    if (input == null) {
+      print('No input provided. Exiting.');
+      return;
+    }
+
+    var choice = int.tryParse(input);
+    if (choice != null) {
+      switch (choice) {
+        case 1:
           riceCooker.addRice();
-        } else if (choice == 2) {
-          await riceCooker.cookRice();
-        } else if (choice == 3) {
-          riceCooker.keepWarm();
-        } else if (choice == 4) {
-          riceCooker.removeRice();
-        } else if (choice == 5) {
-          print('Thank you for using the Rice Cooker Simulator. Goodbye!');
           break;
-        } else {
+        case 2:
+          await riceCooker.cookRice();
+          break;
+        case 3:
+          riceCooker.keepWarm();
+          break;
+        case 4:
+          riceCooker.removeRice();
+          break;
+        case 5:
+          print('Thank you for using the Rice Cooker Simulator. Goodbye!');
+          return;
+        default:
           print('Invalid choice. Please select a valid option.');
-        }
-      } else {
-        print('Invalid input. Please enter a valid number.');
       }
     } else {
-      print('No input provided.');
+      print('Invalid input. Please enter a valid number.');
     }
   }
 }

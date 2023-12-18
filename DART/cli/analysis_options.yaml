@@ -32,6 +32,5 @@ linter:
     - prefer_single_quotes
     - camel_case_types
     - camel_case_extensions
-    - lines_longer_than_80_chars
     # Add or remove rules as per your project's needs
 

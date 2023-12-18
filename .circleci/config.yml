@@ -30,6 +30,18 @@ jobs:
           name: "Run linter"
           command: "cd DART && cd cli && ls -al && dart analyze"
 
+  run-test:
+    docker:
+      - image: dart:latest
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "cd DART && cd cli && ls -al && dart pub get"
+      - run:
+          name: "Run test"
+          command: "cd DART && cd cli && ls -al && dart test"
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -37,3 +49,4 @@ workflows:
     jobs:
       - say-hello
       - run-lint
+      - run-test
