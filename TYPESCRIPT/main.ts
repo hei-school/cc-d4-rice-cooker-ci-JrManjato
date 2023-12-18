@@ -113,6 +113,6 @@ export const simulateRiceCooker = (): void => {
       console.log('No input provided.');
     }
   }
-}
+};
 
 simulateRiceCooker();

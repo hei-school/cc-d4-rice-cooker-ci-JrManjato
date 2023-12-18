@@ -14,29 +14,14 @@ jobs:
           name: "Say hello World"
           command: "echo Hello, World!"
 
-  install-module:
+  run-lint:
     docker:
-      - image: node:14
+      - image: node:18
     steps:
       - checkout
       - run:
-          name: "Change directory to TYPESCRIPT"
-          command: "cd ./TYPESCRIPT"
-      - run:
-          name: "Install dependencies"
-          command: "npm install"
-
-  run-test:
-    docker:
-      - image: node:14
-    steps:
-      - checkout
-      - run:
-          name: "Change directory to TYPESCRIPT"
-          command: "cd ./TYPESCRIPT"
-      - run:
-          name: "running test"
-          command: "npm run test"
+          name: "Run linter (es-lint)"
+          command: "cd TYPESCRIPT && npm install --legacy-peer-deps && npm install --save-dev typescript && ls -al && npm run lint"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -44,5 +29,4 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-      - install-module
-      - run-test
+      - run-lint

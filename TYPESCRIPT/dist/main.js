@@ -72,7 +72,6 @@ var RiceCooker = /** @class */ (function () {
     RiceCooker.prototype.quit = function () {
         console.log('Thank you for using the Rice Cooker Simulator. Goodbye!');
         this._isPowered = false;
-        process.exit(0);
     };
     return RiceCooker;
 }());
@@ -113,7 +112,7 @@ var simulateRiceCooker = function () {
                     riceCooker.quit();
                 }
                 else {
-                    console.log('Invalid choice. Please select a valid option.');
+                    console.log('Invalid choice. Please select a valid option...');
                 }
             }
             else {
