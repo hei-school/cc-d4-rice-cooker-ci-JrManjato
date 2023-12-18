@@ -65,12 +65,14 @@ class RiceCooker {
 }
 
 function displayMenu() {
-  console.log('\nWelcome to the Rice Cooker Simulator!');
-  console.log('1. Add rice');
-  console.log('2. Cook rice');
-  console.log('3. Keep warm');
-  console.log('4. Remove rice');
-  console.log('5. Quit');
+  if (process.env.NODE_ENV !== 'test') {
+    console.log('\nWelcome to the Rice Cooker Simulator!');
+    console.log('1. Add rice');
+    console.log('2. Cook rice');
+    console.log('3. Keep warm');
+    console.log('4. Remove rice');
+    console.log('5. Quit');
+  }
 }
 
 function simulateRiceCooker() {
@@ -109,4 +111,11 @@ function simulateRiceCooker() {
   }
 }
 
-simulateRiceCooker();
+// Run the simulation only if not running in a test environment
+if (process.env.NODE_ENV !== 'test') {
+  simulateRiceCooker();
+}
+
+module.exports = {
+  RiceCooker
+};
