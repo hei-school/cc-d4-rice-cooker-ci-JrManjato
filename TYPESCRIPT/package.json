@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "",
+    "test": "npx mocha",
     "lint": "eslint --ext .ts ./main.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "readline-sync": "^1.4.10"
+    "chai": "^4.3.10",
+    "readline-sync": "^1.4.10",
+    "sinon": "^17.0.1"
   },
   "devDependencies": {
     "@types/readline-sync": "^1.4.8",

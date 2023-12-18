@@ -23,6 +23,15 @@ jobs:
           name: "Run linter (es-lint)"
           command: "cd TYPESCRIPT && npm install --legacy-peer-deps && npm install --save-dev typescript && ls -al && npm run lint"
 
+  run-test:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - run:
+          name: "Run test (mocha & chai"
+          command: "cd TYPESCRIPT && npm install --legacy-peer-deps && npm install --save-dev typescript && ls -al && npm test"
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -30,3 +39,4 @@ workflows:
     jobs:
       - say-hello
       - run-lint
+      - run-test
