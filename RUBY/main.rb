@@ -11,6 +11,7 @@ class RiceCooker
   def add_rice
     if !@rice_present
       @rice_present = true
+
       puts 'Rice has been added.'
     else
       puts 'There\'s already rice in the rice cooker.'
@@ -44,7 +45,7 @@ class RiceCooker
   end
 
   def remove_rice
-    if @rice_present && @rice_cooked && @heating_in_progress
+    if @rice_present
       @rice_present = false
       @rice_cooked = false
       @heating_in_progress = false
@@ -56,6 +57,8 @@ class RiceCooker
 end
 
 def display_menu
+  return if ARGV.include?('test')
+
   puts "\nWelcome to the Rice Cooker Simulator!"
   puts '1. Add rice'
   puts '2. Cook rice'
@@ -65,29 +68,36 @@ def display_menu
 end
 
 def simulate_rice_cooker
+  return if ARGV.include?('test')
+
   rice_cooker = RiceCooker.new
 
   loop do
     display_menu
-    print 'Enter your choice: '
-    choice = gets.chomp.to_i
-
-    case choice
-    when 1
-      rice_cooker.add_rice
-    when 2
-      rice_cooker.cook_rice
-    when 3
-      rice_cooker.keep_warm
-    when 4
-      rice_cooker.remove_rice
-    when 5
-      puts 'Thank you for using the Rice Cooker Simulator. Goodbye!'
-      break
-    else
-      puts 'Invalid choice. Please select a valid option.'
-    end
+    process_user_choice(rice_cooker)
   end
+end
+
+def process_user_choice(rice_cooker)
+  print 'Enter your choice: '
+  choice_input = gets&.chomp
+  choice = parse_choice(choice_input)
+
+  case choice
+  when 1 then rice_cooker.add_rice
+  when 2 then rice_cooker.cook_rice
+  when 3 then rice_cooker.keep_warm
+  when 4 then rice_cooker.remove_rice
+  when 5
+    puts 'Thank you for using the Rice Cooker Simulator. Goodbye!'
+    exit
+  else
+    puts 'Invalid choice. Please select a valid option.'
+  end
+end
+
+def parse_choice(choice_input)
+  choice_input ? choice_input.to_i : gets&.chomp&.to_i
 end
 
 simulate_rice_cooker

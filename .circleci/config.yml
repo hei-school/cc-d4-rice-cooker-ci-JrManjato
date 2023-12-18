@@ -27,6 +27,15 @@ jobs:
           name: "Run linter (robocop)"
           command: "cd RUBY && bundle install && rubocop"
 
+  run-test:
+    docker:
+      - image: ruby:3.0
+    steps:
+      - checkout
+      - run:
+          name: "Run test (rspec)"
+          command: "cd RUBY && gem install rspec && rspec"
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
@@ -34,3 +43,4 @@ workflows:
     jobs:
       - say-hello
       - run-lint
+      - run-test
