@@ -18,9 +18,22 @@ jobs:
           name: "Say hello World"
           command: "echo Hello, World!"
 
+  run-lint:
+    docker:
+      - image: dart:latest
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: "cd DART && cd cli && ls -al && dart pub get"
+      - run:
+          name: "Run linter"
+          command: "cd DART && cd cli && ls -al && dart analyze"
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - run-lint

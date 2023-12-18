@@ -11,8 +11,6 @@
 # (the recommended set includes the core lints).
 # The core lints are also what is used by pub.dev for scoring packages.
 
-include: package:lints/recommended.yaml
-
 # Uncomment the following section to specify additional rules.
 
 # linter:
@@ -33,5 +31,7 @@ linter:
   rules:
     - prefer_single_quotes
     - camel_case_types
+    - camel_case_extensions
+    - lines_longer_than_80_chars
     # Add or remove rules as per your project's needs
 
