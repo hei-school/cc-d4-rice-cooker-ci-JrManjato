@@ -18,9 +18,19 @@ jobs:
           name: "Say hello World"
           command: "echo Hello, World!"
 
+  run-lint:
+    docker:
+      - image: ruby:3.0
+    steps:
+      - checkout
+      - run:
+          name: "Run linter (robocop)"
+          command: "cd RUBY && bundle install && rubocop"
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - run-lint

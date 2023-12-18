@@ -1,0 +1,30 @@
+# .rubocop.yml
+
+# Indentation
+Layout/CaseIndentation:
+  IndentationWidth: 2
+
+# Espaces autour des opérateurs
+Layout/SpaceAroundOperators:
+  EnforcedStyle: single_space
+
+# Noms de variables
+Naming/VariableName:
+  AllowedNames:
+    - 'snake_case'
+
+# Longueur maximale de ligne
+Metrics/LineLength:
+  Max: 80
+
+# Longueur maximale d'une méthode
+Metrics/MethodLength:
+  Max: 100
+
+# Espaces blancs à la fin des lignes
+Layout/TrailingWhitespace:
+  EnforcedStyle: no_trailing_whitespace
+
+# Utilisation de `# frozen_string_literal: true`
+Style/FrozenStringLiteralComment:
+  Enabled: true
