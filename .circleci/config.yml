@@ -18,9 +18,19 @@ jobs:
           name: "Say hello World"
           command: "echo Hello, World!"
 
+  run-lint:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - run:
+          name: "Run linter (es-lint)"
+          command: "cd JAVASCRIPT && npm install --legacy-peer-deps && ls -al && npm run lint"
+
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - run-lint
