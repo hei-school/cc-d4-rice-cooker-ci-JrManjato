@@ -1,11 +1,28 @@
 # Rice Cooker App
 ## How to Use
 
-1. Switch to the language directory using the command `cd .\DART\`
+1. Switch to the language directory using the command `cd .\DART\cli`
    <br>
-2. To use this simulator with Dart, make sure you have the Dart SDK installed. You can integrate the Dart linter, dart analyze, by following the instructions provided in the [documentation](https://dart.dev/tools/dart-tool).
-   <br>
-3. Follow the on-screen prompts to perform wallet actions:
+2. Install dependencies:
+
+    ```bash
+    dart pub get
+    ```
+3. You can run the application by:
+    ```bash
+    dart .\bin\main.dart
+    ``` 
+4. For Linter you can run the command:
+
+    ```bash
+    dart analyze
+    ```
+5. For testing, move to cli directory and run:
+
+    ```bash
+    dart test
+    ```
+6. Follow the on-screen prompts to perform wallet actions:
    - Enter `1` to add rice.
    - Enter `2` to cook rice.
    - Enter `3` to keep warm.
