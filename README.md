@@ -7,7 +7,7 @@
 2. Make sure you have installed node and Run the program using the `npm` command:
 
     ```bash
-    npm install
+    npm install --legacy-peer-deps && npm install --save-dev typescript
     ```
 3. Compile using `tsc` command:
 
@@ -29,8 +29,13 @@
     npm run lint
     
     ```
-   
-6. Follow the on-screen prompts to perform wallet actions:
+6. For running test, run
+
+    ```bash
+    npm test
+    
+    
+7. Follow the on-screen prompts to perform wallet actions:
    - Enter `1` to add rice.
    - Enter `2` to cook rice.
    - Enter `3` to keep warm.
