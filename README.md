@@ -16,10 +16,25 @@ This is a command-line Rice Cooker application implemented in four different lan
 
 ## How to Use
 
-1. Change branch for the language you want to use.
-2. Run the program according to the command corresponding to each language, which you can find by reading the readme of the current branch.
-   
-3. Follow the on-screen prompts to perform rice cooker actions:
+1. Move to the ruby directory `cd .\RUBY`
+2. Install dependencies by the command:
+    ```bash
+    bundle install
+    ```
+3. Run the program:
+   ```bash
+   ruby main.rb
+    ```
+
+4. For Linter, you can run:
+   ```bash
+   rubocop
+    ```
+5. For test, you can run:
+      ```bash
+   gem install rspec && rspec
+    ```
+6. Follow the on-screen prompts to perform rice cooker actions:
    - Enter `1` to add rice.
    - Enter `2` to cook rice.
    - Enter `3` to keep warm.
